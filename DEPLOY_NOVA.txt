@@ -1,0 +1,29 @@
+NOVA — ANDROID + WINDOWS WEB DEPLOYMENT
+=======================================
+
+WHY USB OPENING SHOWED PLAIN TEXT
+Android's file manager passed the file through a content:// address. The file provider/browser combination appears to be treating the file as text rather than an HTML document. The HTML references styles.css and app.js correctly. Serving the app over HTTPS avoids this content:// MIME-type issue and is required for reliable PWA installation and service workers.
+
+RECOMMENDED HOSTING PATH: GITHUB PAGES
+This package includes a deployment workflow. It publishes only nova_release/ as a static website. No API key or private credential is included.
+
+1. On a device with internet, sign in to GitHub (or create an account if eligible under its terms).
+2. Create a new repository named nova-web. Choose Public if you want a free public Pages site; repository source code will be visible to everyone.
+3. Extract this ZIP.
+4. Upload the contents of the extracted folder to the repository main branch. Keep the structure: .github/workflows/pages.yml, .nojekyll, DEPLOY_NOVA.txt, and nova_release/ with all its files and icons.
+5. Commit the files to main.
+6. In repository Settings > Pages, choose GitHub Actions as the build/deployment source.
+7. Open Actions and wait for Deploy NOVA to GitHub Pages to finish successfully.
+8. Open the HTTPS URL shown in the deployment or Settings > Pages.
+9. On Android Chrome, open the URL, wait for the app to load, then use Chrome menu > Install app or Add to Home screen.
+10. Open NOVA once while online. Its app shell can then be cached for supported offline use. Test by disabling internet and reopening it.
+
+IMPORTANT LIMITATIONS
+- Do not create an account if you are not eligible under the service's rules.
+- Do not put API keys, passwords or private information in this repository.
+- Never expose a provider API key in a public website frontend. A secure private HTTPS backend is needed for production AI.
+- GitHub Pages does not run nova_server.py. That proxy remains a local Windows helper.
+- No automatic device sync is implemented. Use Settings > Data & privacy to export a JSON backup to USB and restore it on the other device.
+- Offline saved chats, projects, notes, memory and local tools require a successful first HTTPS visit and caching. Advanced AI, live research, cloud image understanding and remote sync need online services.
+- Voice recognition may use an online browser service and is not guaranteed offline.
+- This package is deployment-ready but has NOT been published automatically. Hosting requires an account and your approval.

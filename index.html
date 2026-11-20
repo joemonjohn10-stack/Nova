@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#07111f"><meta name="description" content="NOVA — a personal intelligence workspace">
+  <link rel="manifest" href="manifest.json"><link rel="icon" href="nova.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css"><title>NOVA — Personal Intelligence</title>
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand"><div class="brand-mark">N</div><div><div class="brand-name" id="brandName">NOVA</div><div class="brand-sub">PERSONAL INTELLIGENCE</div></div></div>
+      <button class="new-chat" id="newChat">＋ <span>New conversation</span></button>
+      <nav class="nav" aria-label="Main navigation">
+        <button class="nav-item active" data-view="chat"><span>◈</span> Assistant</button>
+        <button class="nav-item" data-view="projects"><span>▦</span> Projects</button>
+        <button class="nav-item" data-view="tasks"><span>✓</span> Tasks & notes</button>
+        <button class="nav-item" data-view="memory"><span>⌘</span> Memory</button>
+        <button class="nav-item" data-view="history"><span>◷</span> History</button>
+        <button class="nav-item" data-view="settings"><span>⚙</span> Settings</button>
+      </nav>
+      <div class="sidebar-bottom"><div class="status-dot"></div><span id="connectionStatus">Local workspace ready</span><button id="installBtn" class="install-btn" hidden>Install</button></div>
+    </aside>
+    <main class="main">
+      <header class="topbar"><button class="mobile-menu" id="mobileMenu" aria-label="Open menu">☰</button><div class="crumb" id="pageTitle">Assistant <span>/</span> New conversation</div><div class="top-actions"><span class="local-chip">● PRIVATE WORKSPACE</span><button class="icon-btn" id="themeToggle" title="Toggle theme">◐</button></div></header>
+      <section class="view active" id="view-chat">
+        <div class="chat-wrap">
+          <div class="welcome" id="welcome"><div class="orb"><div class="orb-core">N</div></div><div class="eyebrow">YOUR PERSONAL INTELLIGENCE SYSTEM</div><h1 id="welcomeTitle">What shall we<br><em>explore today?</em></h1><p id="welcomeSubtitle">A workspace for ideas, projects and discovery.</p>
+            <div class="suggestions"><button class="suggestion" data-prompt="Help me plan my day and prioritise my tasks.">✦ Plan my day</button><button class="suggestion" data-prompt="Help me develop a new project from idea to first steps.">⌁ Develop a project</button><button class="suggestion" data-prompt="Explain a difficult topic in a clear, structured way.">◎ Learn something</button></div>
+          </div>
+          <div class="messages" id="messages" aria-live="polite"></div>
+          <div class="composer-area"><div class="composer"><textarea id="promptInput" rows="1" placeholder="Message NOVA…" aria-label="Message NOVA"></textarea><div class="composer-tools"><div class="composer-hint">Enter to send · Shift + Enter for a new line</div><div class="composer-buttons"><button class="tool-btn" id="voiceBtn" title="Voice input">🎙</button><button class="send-btn" id="sendBtn" title="Send message">↑</button></div></div></div><div class="disclaimer" id="providerHint">NOVA can make mistakes. Connect an AI provider in Settings for AI-powered replies.</div></div>
+        </div>
+      </section>
+      <section class="view" id="view-projects"><div class="page-head"><div><div class="eyebrow">YOUR WORK, CONNECTED</div><h1>Projects</h1><p>Keep goals, decisions and next steps in one place.</p></div><button class="primary-btn" id="addProject">＋ New project</button></div><div class="card-grid" id="projectList"></div></section>
+      <section class="view" id="view-tasks"><div class="page-head"><div><div class="eyebrow">CAPTURE AND ORGANISE</div><h1>Tasks & notes</h1><p>Small actions. Clear thinking. Visible progress.</p></div></div><div class="two-col"><div class="panel"><div class="panel-title">Tasks <button class="text-btn" id="addTask">＋ Add task</button></div><div id="taskList" class="item-list"></div></div><div class="panel"><div class="panel-title">Quick notes <button class="text-btn" id="addNote">＋ Add note</button></div><div id="noteList" class="item-list"></div></div></div><div class="panel timer-panel"><div><div class="eyebrow">FOCUS TOOL</div><h2>Focus timer</h2><p>Use a simple timer to protect your attention.</p></div><div class="timer"><div id="timerDisplay">25:00</div><div class="timer-controls"><button class="secondary-btn" id="timerStart">Start</button><button class="ghost-btn" id="timerReset">Reset</button></div></div></div></section>
+      <section class="view" id="view-memory"><div class="page-head"><div><div class="eyebrow">USER-CONTROLLED CONTEXT</div><h1>Memory</h1><p>Only save information you choose to keep. You can edit or delete it anytime.</p></div><button class="primary-btn" id="addMemory">＋ Add memory</button></div><div class="notice">NOVA does not automatically turn every conversation into a permanent memory. Add only information you want available in future chats on this browser.</div><div class="memory-list" id="memoryList"></div></section>
+      <section class="view" id="view-history"><div class="page-head"><div><div class="eyebrow">YOUR CONVERSATIONS</div><h1>History</h1><p>Find and reopen conversations saved on this device.</p></div><input class="search-input" id="historySearch" placeholder="Search conversations…"></div><div class="history-list" id="historyList"></div></section>
+      <section class="view" id="view-settings"><div class="page-head"><div><div class="eyebrow">MAKE IT YOURS</div><h1>Settings</h1><p>Customise NOVA's identity, connection and privacy.</p></div></div><div class="settings-grid"><div class="panel"><div class="panel-title">Identity</div><label>Assistant name<input id="assistantName" maxlength="24" value="NOVA"></label><label>Personality / response style<textarea id="assistantStyle" rows="3">Calm, thoughtful, curious, concise and practical. Be honest about uncertainty.</textarea></label><label>Accent colour<select id="accentSelect"><option value="cyan">Electric cyan</option><option value="violet">Violet</option><option value="blue">Deep blue</option><option value="amber">Solar amber</option></select></label><button class="primary-btn" id="saveIdentity">Save identity</button></div>
+      <div class="panel"><div class="panel-title">AI connection</div><div class="notice small">Connect a compatible AI provider to activate NOVA’s live reasoning. On Windows, START_NOVA launches a local proxy to avoid browser CORS restrictions. Your API key is kept only for this browser session and is excluded from backups. Never enter it on a shared or school computer. Your prompts are sent to the provider.</div><label>API endpoint<input id="apiEndpoint" placeholder="https://api.openai.com/v1/chat/completions"></label><p class="muted tiny">Use your provider’s OpenAI-compatible Chat Completions URL, not its website homepage.</p><label>Model name<input id="apiModel" placeholder="Enter a model supported by your provider"></label><label>API key<input id="apiKey" type="password" autocomplete="off" placeholder="Paste provider key"></label><div class="row-actions"><button class="primary-btn" id="saveProvider">Save connection</button><button class="secondary-btn" id="testProvider">Test connection</button><button class="ghost-btn" id="forgetKey">Remove key</button></div><div class="provider-state" id="providerState">No AI provider connected. Save your settings, then test the connection.</div></div>
+      <div class="panel"><div class="panel-title">Data & privacy</div><p class="muted">Your workspace is stored on this device. Download a backup, move it to your USB drive, then restore it on the other device. Backups never include AI credentials.</p><div class="row-actions"><button class="secondary-btn" id="exportData">Download USB backup</button><label class="file-label">Restore from USB<input type="file" id="importData" accept="application/json,.json"></label></div><button class="danger-btn" id="clearData">Clear all local data</button></div>
+      <div class="panel"><div class="panel-title">Capabilities</div><div class="cap-row"><span>Local workspace</span><b class="ok">READY</b></div><div class="cap-row"><span>Voice input</span><b id="voiceState">CHECKING</b></div><div class="cap-row"><span>Speech output</span><b id="speechState">CHECKING</b></div><div class="cap-row"><span>AI provider</span><b id="aiState">NOT CONNECTED</b></div><div class="cap-row"><span>Offline access</span><b class="ok">LOCAL TOOLS</b></div><p class="muted tiny">Voice recognition depends on browser support and may require internet. Local tools work offline. Advanced AI, image understanding and web research require online services and are not bundled.</p></div></div></section>
+      <footer class="footer">NOVA <span>·</span> FIRST RELEASE <span>·</span> LOCAL-FIRST BY DESIGN</footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <dialog id="modal"><form method="dialog" id="modalForm"><div class="modal-head"><h2 id="modalTitle">Create</h2><button class="icon-btn" value="cancel" aria-label="Close">×</button></div><div id="modalBody"></div><div class="modal-actions"><button class="ghost-btn" value="cancel">Cancel</button><button class="primary-btn" id="modalSave" value="default">Save</button></div></form></dialog>
+  <script src="app.js"></script>
+</body></html>
